@@ -1,19 +1,38 @@
+import bcrypt  from 'bcryptjs'
+
+
+
 const data = {
+  users:[
+    {
+    name:"Sasco",
+    phoneNumber:'0248958661',
+    email:'admin@gmail.com',
+    password:bcrypt.hashSync('1234', 8),
+    isAdmin:true
+  },
+    {
+    name:"Mercy",
+    phoneNumber:'0208958661',
+    email:'mercy@gmail.com',
+    password:bcrypt.hashSync('1234', 8),
+    isAdmin:false
+  }
+
+],
   products: [
     {
-      _id: '1',
-      name: 'Nike Slim Shirt',
+      name: 'Midi sundress with ruched front',
       category: 'Shirts',
-      image: '/images/p1.jpg',
+      image: '/images/dress3.jpg',
       price: 120,
       countInStock: 10,
-      brand: 'Nike',
+      brand: 'cussi',
       rating: 4.5,
       numReviews: 10,
-      description: 'high quality product',
+      description: 'This is for all the latest trends, no matter who you are, where you’re from and what you’re up to. Exclusive to ASOS, our universal brand is here for you, and comes in all our fit ranges: ASOS Curve, Tall, Petite and Maternity. Created by us, styled by you.',
     },
     {
-      _id: '2',
       name: 'Adidas Fit Shirt',
       category: 'Shirts',
       image: '/images/p2.jpg',
@@ -25,19 +44,17 @@ const data = {
       description: 'high quality product',
     },
     {
-      _id: '3',
-      name: 'Lacoste Free Shirt',
+      name: 'cami maxi dress in polka dot',
       category: 'Shirts',
-      image: '/images/p3.jpg',
+      image: '/images/dress4.jpg',
       price: 220,
       countInStock: 0,
-      brand: 'Lacoste',
+      brand: 'Straight Dress',
       rating: 4.8,
       numReviews: 17,
-      description: 'high quality product',
+      description: 'This is for all the latest trends, no matter who you are, where you’re from and what you’re up to. Exclusive to ASOS, our universal brand is here for you, and comes in all our fit ranges: ASOS Curve, Tall, Petite and Maternity. Created by us, styled by you.',
     },
     {
-      _id: '4',
       name: 'Nike Slim Pant',
       category: 'Pants',
       image: '/images/p4.jpg',
@@ -49,7 +66,6 @@ const data = {
       description: 'high quality product',
     },
     {
-      _id: '5',
       name: 'Puma Slim Pant',
       category: 'Pants',
       image: '/images/p5.jpg',
@@ -61,7 +77,6 @@ const data = {
       description: 'high quality product',
     },
     {
-      _id: '6',
       name: 'Adidas Fit Pant',
       category: 'Pants',
       image: '/images/p6.jpg',
@@ -73,8 +88,8 @@ const data = {
       description: 'high quality product',
     },
     {
-      _id: '7',
-      name: 'Adidas Fit Pant',
+     
+      name: 'Midi sundress with shirring detail',
       category: 'Pants',
       image: '/images/dress1.jpg',
       price: 139,
@@ -85,8 +100,8 @@ const data = {
       description: 'high quality product',
     },
     {
-      _id: '8',
-      name: 'Adidas Fit Pant',
+     
+      name: 'Midi sundress with ruched front',
       category: 'Pants',
       image: '/images/dress2.jpg',
       price: 139,
@@ -96,6 +111,6 @@ const data = {
       numReviews: 15,
       description: 'high quality product',
     },
-  ],
+  ]
 };
 export default data;

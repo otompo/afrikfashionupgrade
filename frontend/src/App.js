@@ -1,57 +1,79 @@
-import data from "./data";
+
+import { useSelector, useDispatch } from 'react-redux';
+import {BrowserRouter, Link, Route} from 'react-router-dom'
+import { signout } from './actions/userActions';
+import CartScreen from './screens/CartScreen';
+import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen';
+import SigninScreen from './screens/SigninScreen';
+
 
 function App() {
+    const cart = useSelector(state => state.cart)
+    const {cartItems} = cart;
+
+    const userSignin= useSelector((state)=>state.userSignin)
+    const {userInfo}=userSignin
+    
+    const dispatch = useDispatch()
+    const signoutHandler=()=>{
+        dispatch(signout())
+    }
   return (
-    <div className="App">
-     
-     
-   <div className="grid-container">
-        <header className="row">
-            <div>
-                <a className="brand" href="/">AfrikFashion</a>
-            </div>
-            <div>
-                <a href="/">Home</a>
-                <a href="/blog">Blog</a>
-                <a href="/cart">Cart</a>
-                <a href="/signin">Sign In</a>
-            </div>
-        </header>
 
-        <main>
-           <div className="row center">
-              {
-                data.products.map(product=>(
-                    <div ket={product._id} className="card">
-                      <a href={`/product/${product._id}`}>
-                          <img className="medium" src={product.image} alt={product.name} />
-                      </a>
-                      <div className="card-body">
-                          <a href={`/product/${product._id}`}>
-                              <h2>{product.name}</h2>
-                          </a>
-                          <div className="rating">
-                              <span><i className="fa fa-star"></i></span>
-                              <span><i className="fa fa-star"></i></span>
-                              <span><i className="fa fa-star"></i></span>
-                              <span><i className="fa fa-star"></i></span>
-                              <span><i className="fa fa-star"></i></span>
-                          </div>
-                          <div className="price">GHC {product.price}</div>
-                      </div>
-                  </div>
-                    ))
-                  }
-           </div>
-        </main>
+    <BrowserRouter>
+     <div className="App">    
+        <div className="grid-container">
+                {/* ***************Header Section Start*********************** */}
+                <header className="row">
+                    <div>
+                        <Link className="brand" to="/">AfrikFashion</Link>
+                    </div>
+                    <div>
+                        <Link to="/">Home</Link>
+                        <Link to="/blog">Blog</Link>
+                        <Link to="/cart">Cart
+                        {cartItems.length > 0 && (
+                            <span className="badge">{cartItems.length}</span>
+                        )}
+                        </Link>
+                        {
+                            userInfo ? (
+                                <div className="dropdown">
+                                     <Link to="#">{userInfo.name} <i className="fa fa-caret-down"></i></Link>
+                                    <ul className="dropdown-content">
+                                        <Link to="#signout" onClick={signoutHandler}>
+                                            Sign Out
+                                        </Link>
+                                    </ul>
+                                </div>                            
+                            ):
+                             <Link to="/signin">
+                            Sign In
+                            </Link>
+                        }
+                       
+                    </div>
+                </header>
+                 {/* ***************Header Section Ends*********************** */}
 
-        <footer className="row center">
-            All rigth reserved
-        </footer>
+                {/* ***************Main Section Start*********************** */}
+                <main>
+                    <Route path='/cart/:id?' component={CartScreen} />
+                    <Route path='/' component={HomeScreen} exact />                     
+                    <Route path='/product/:id' component={ProductScreen} />
+                    <Route path='/signin' component={SigninScreen} />
+                </main>
+            {/* ***************Main Section Ends*********************** */}
 
-   </div>
-       
-    </div>
+            {/* ***************Footer Section Start*********************** */}
+            <footer className="row center">
+                All rigth reserved
+            </footer>
+            {/* ***************Footer Section Ends*********************** */}
+        </div>
+     </div>
+    </BrowserRouter>
   );
 }
 
