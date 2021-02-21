@@ -27,7 +27,6 @@ header{
     grid-area: header;
     background-color: #203040;
     box-shadow: 1px 0 2px -2px #02181b;
-    
 }
 
 main{
@@ -40,6 +39,7 @@ footer{
     background-color: #203040;
     color:#fff;
 }
+
 /* Common Classes */
 h1{
     font-size: 1.8rem;
