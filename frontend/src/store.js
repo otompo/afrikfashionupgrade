@@ -4,17 +4,24 @@ import { cartReducer } from './reducers/cartReducers';
 import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMyListReducer, orderPayReducer } from './reducers/orderReducers';
 
 import { 
+    productCategoryListReducer,
     productCreateReducer,
     productDeleteReducer,
     productDetailsReducer, 
     productListReducer, 
+    productReviewCreateReducer, 
     productUpdateReducer
 } from './reducers/productReducers';
 import { 
+    userAddressMapReducer,
+    userDeleteReducer,
     userDetailsReducer,
+    userListReducer,
     userRegisterReducer, 
     userSigninReducer,
-    userUpdateProfileReducer
+    userTopSellerListReducer,
+    userUpdateProfileReducer,
+    userUpdateReducer
  } from './reducers/userReducer';
 
 
@@ -52,7 +59,14 @@ const reducer = combineReducers({
     productDelete:productDeleteReducer,
     orderList:orderListReducer,
     orderDelete:orderDeleteReducer,
-    orderDeliver:orderDeliverReducer
+    orderDeliver:orderDeliverReducer,
+    userList:userListReducer,
+    userDelete:userDeleteReducer,
+    userUpdate:userUpdateReducer,
+    userTopSellerList:userTopSellerListReducer,
+    productCategoryList:productCategoryListReducer,
+    productReviewCreate:productReviewCreateReducer,
+    userAddressMap: userAddressMapReducer
 })
 
 const composerEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

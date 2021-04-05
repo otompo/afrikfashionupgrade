@@ -7,7 +7,7 @@ import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../constants/product
 
 
 export default function ProductListScreen(props) {
-
+    const sellerMode = props.match.path.indexOf('/seller') >= 0;
     const dispatch = useDispatch()
 
     const productList = useSelector(state => state.productList)
@@ -19,6 +19,8 @@ export default function ProductListScreen(props) {
     const productDelete = useSelector(state => state.productDelete)
     const{loading:loadingDelete, error:errorDelete, success:successDelete}=productDelete
 
+    const userSignin = useSelector(state => state.userSignin)
+    const {userInfo}=userSignin
     
 
 
@@ -32,17 +34,26 @@ export default function ProductListScreen(props) {
                 type:PRODUCT_DELETE_RESET
             })
         }
-       dispatch(listProducts())
+        
+       dispatch(listProducts({seller: sellerMode?userInfo._id:''}))
 
-    }, [dispatch, props.history, successCreate, createdProduct, successDelete])
+    }, [
+        dispatch, 
+        props.history, 
+        successCreate,
+        userInfo._id, 
+        sellerMode, 
+        createdProduct, 
+        successDelete
+    ])
 
     const deleteHandler=(product)=>{
         if(window.confirm(`Are You Sure to Delete ${product.name}` )){
 
             dispatch(deletedProduct(product._id))
         }
-
     }
+
     const createHandler=()=>{
         dispatch(createProduct())
     }
@@ -88,7 +99,7 @@ export default function ProductListScreen(props) {
                               <td>
                                   <button type="button" className="edit"
                                   onClick={()=>props.history.push(`/product/${product._id}/edit`)}>Edit</button>
-                                  <button type="button" className="danger"
+                                   <button type="button" className="danger"
                                   onClick={()=>deleteHandler(product)}>Delete</button>
                               </td>
                           </tr>

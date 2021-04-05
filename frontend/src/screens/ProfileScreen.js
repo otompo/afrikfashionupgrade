@@ -12,6 +12,10 @@ export default function ProfileScreen(props) {
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
     const [confirmPassword, setConfirmPassword]=useState('')
+
+    const [sellerName, setSellerName]=useState('')
+    const [sellerLogo, setSellerLogo]=useState('')
+    const [sellerDescription, setSellerDescription]=useState('')
  
 
 
@@ -27,8 +31,7 @@ export default function ProfileScreen(props) {
     const {loading:loadingUpdate,error:errorUpdate, success:successUpdate}=userUpdateProfile
    
 
- useEffect(() => {    
-          
+ useEffect(() => {            
 
                 if (!user) {
                   dispatch({ type: USER_UPDATE_PROFILE_RESET });
@@ -36,11 +39,16 @@ export default function ProfileScreen(props) {
                 } else {
                   setName(user.name);
                   setEmail(user.email);
+                  if(user.seller){
+                    setSellerName(user.seller.name);
+                    setSellerLogo(user.seller.logo);
+                    setSellerDescription(user.seller.description);
+                  }
                  
                 }
            
       
-  }, [dispatch, userInfo._id, user,  props.history]);
+  }, [dispatch, userInfo._id, user]);
 
     const submitHandler = (e) => {
     e.preventDefault();
@@ -54,7 +62,9 @@ export default function ProfileScreen(props) {
           name,
           email,
           password,
-         
+         sellerName,
+         sellerLogo,
+         sellerDescription
         })
       );
     }
@@ -113,6 +123,42 @@ export default function ProfileScreen(props) {
                             onChange={(e)=>setConfirmPassword(e.target.value)}
                             ></input>
                     </div>
+
+                    {user.isSeller && (
+                      <>
+                        <h2>Seller</h2>
+                        <div>
+                            <label htmlFor="sellerName">Seller Name</label>
+                            <input 
+                            id="sellerName" 
+                            type="text" 
+                            placeholder="Enter Seller Name" 
+                            value={sellerName} 
+                            onChange={(e)=>setSellerName(e.target.value)}/>
+                        </div>
+                        <div>
+                            <label htmlFor="sellerLogo">Seller Logo</label>                            
+                            <input 
+                            id="sellerLogo" 
+                            type="text" 
+                            label="Enter Seller Name" 
+                            value={sellerLogo} 
+                            onChange={(e)=>setSellerLogo(e.target.value)}/>
+                        </div>
+                        <div>
+                            <label htmlFor="sellerDescription">Seller Description</label>
+                            <textarea
+                            id="sellerDescription"
+                            rows="3"
+                            type="text"
+                            placeholder="Enter description"
+                            value={sellerDescription}
+                            onChange={(e) => setSellerDescription(e.target.value)}
+                          ></textarea>
+                           
+                        </div>
+                      </>
+                    )}
                     <div>
                         <label />
                         <button className="primary" type="submit">Update</button>

@@ -15,6 +15,7 @@ const orderSchema=new mongoose.Schema({
             type:String,
             required:true
         },
+        
         price:{
             type:Number,
             required:true,           
@@ -34,6 +35,8 @@ const orderSchema=new mongoose.Schema({
       city:{type:String, required:true},  
       postalCode:{type:String, required:true},  
       country:{type:String, required:true},  
+      lat:Number,
+      lng:Number,
     },
 
     paymentMethod:{type:String,required:true},
@@ -52,6 +55,10 @@ const orderSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:true
+    },
+    seller: { 
+        type: mongoose.Schema.Types.ObjectID,
+        ref: 'User' 
     },
     isPaid:{
         type:Boolean,
