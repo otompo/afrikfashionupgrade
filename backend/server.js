@@ -60,7 +60,13 @@ app.get('/api/config/google', (req, res) => {
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 app.use(express.static(path.join(__dirname, '/frontend/build')));
+<<<<<<< HEAD
 // app.get('*', (req,res)=>res.sendFile(path.join(__dirname, '/frontend/build/index.html')))
+=======
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
+);
+>>>>>>> d3a9e38d2e2ae66abd191c7dc79974446b7c30fa
 
 app.get('/', (req, res) => {
   res.send('Server is ready');
